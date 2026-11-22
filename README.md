@@ -30,134 +30,27 @@ To implement a basic lane detection pipeline using OpenCV by completing missing 
 
 ##  Algorithm & Explanation
 
----
+Step 1: Import Libraries
 
-###  Step 1: Import Libraries
+Step 2: Read the Image
 
-```python
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-```
+Step 3: Convert to Grayscale
 
----
+Step 4: Display Images
 
-###  Step 2: Read the Image
+Step 5: Thresholding
 
-```python
-# Read the image using OpenCV
+Step 6: Region of Interest (ROI)
 
-###
-# Your Code Here
-###
-```
+Step 7: Edge Detection (Canny)
+
+Step 8: Gaussian Blur
+
+Step 9: Hough Transform
+
+Step 10: Lane Detection Logic
 
 ---
-
-###  Step 3: Convert to Grayscale
-
-```python
-# Convert to grayscale.
-
-###
-# Your Code Here
-###
-```
-
----
-
-###  Step 4: Display Images
-
-```python
-plt.figure(figsize=(10,5))
-
-###
-# Your Code Here
-###
-```
-
----
-
-###  Step 5: Thresholding
-
-```python
-# Apply thresholding
-
-threshold = 
-###
-# Your Code Here
-###
-```
-
----
-
-###  Step 6: Region of Interest (ROI)
-
-```python
-# ROI masking already provided
-# (Do not modify)
-```
-
----
-
-### Step 7: Edge Detection (Canny)
-
-```python
-# Perform Edge Detection
-
-###
-# Your Code Here
-###
-```
-
----
-
-###  Step 8: Gaussian Blur
-
-```python
-# Apply Gaussian Blur
-
-###
-# Your Code Here
-###
-```
-
----
-
-###  Step 9: Hough Transform
-
-```python
-# Detect lines using Hough Transform
-
-###
-# Your Code Here
-###
-```
-
----
-
-### Step 10: Lane Detection Logic
-
-```python
-# Already implemented
-# (Do not modify)
-```
-
----
-
-##  Expected Output
-
-* Original image
-* Grayscale image
-* Thresholded image
-* ROI masked image
-* Edge detected image
-* Smoothed image
-* Detected lines
-* Final lane detection output
-
----
-
 ##  Instructions
 
 * Fill ONLY in `# Your Code Here` sections
@@ -166,14 +59,79 @@ threshold =
 * Verify outputs
 
 ---
+##  Developed By
 
-## Result
+## Name: Tamil Pavalan M    
+## Reg. No: 212223110058
 
-Thus, the lane detection pipeline is successfully implemented by completing the missing code sections. The system detects and highlights lane lines effectively.
+## Program
+```
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+# Step 2: Load the image using imread() from cv2 module
+image = cv2.imread('q7.jpg')  # Replace 'image.jpg' with your image path
+# Step 3: Convert the image to grayscale
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Input image and grayscale image
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # Convert image to RGB for displaying
+plt.title("Input Image")
+plt.axis('off')
+(np.float64(-0.5), np.float64(1279.5), np.float64(719.5), np.float64(-0.5))
+
+plt.imshow(gray_image, cmap='gray')
+plt.title("Grayscale Image")
+plt.axis('off')
+(np.float64(-0.5), np.float64(1279.5), np.float64(719.5), np.float64(-0.5))
+
+# Step 4: Using Canny operator from cv2, detect the edges of the image
+edges = cv2.Canny(gray_image, 50, 150)  # Canny edge detection with threshold values 50 and 150
+# Canny Edge Detector output
+plt.imshow(edges, cmap='gray')
+plt.title("Canny Edge Detector")
+plt.axis('off')
+(np.float64(-0.5), np.float64(1279.5), np.float64(719.5), np.float64(-0.5))
+
+# Step 5: Using the HoughLinesP(), detect line coordinates for every point in the image
+# The parameters of HoughLinesP are: image, resolution, threshold, minLineLength, maxLineGap
+lines = cv2.HoughLinesP(edges, 1, np.pi / 180, 100, minLineLength=50, maxLineGap=10)
+# Step 6: Using a for loop, draw the lines on the original image using the detected coordinates
+# The lines variable contains the endpoints of the detected lines
+for line in lines:
+    x1, y1, x2, y2 = line[0]  # Unpacking the line coordinates
+    cv2.line(image, (x1, y1), (x2, y2), (0, 255, 0), 2)  # Draw green lines with thickness of 2
+# Display the result of Hough Transform (Image with lines)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # Image with lines drawn
+plt.title("Result of Hough Transform")
+plt.axis('off')
+(np.float64(-0.5), np.float64(1279.5), np.float64(719.5), np.float64(-0.5))
+```
+---
+
+##  Expected Output
+
+* Original image
+
+<img width="632" height="392" alt="image" src="https://github.com/user-attachments/assets/e4a7e659-9501-4b06-aaf2-37aa99a33ff7" />
+
+* Grayscale image
+
+<img width="642" height="397" alt="image" src="https://github.com/user-attachments/assets/18e7a7ee-ed29-4f26-8152-65b23c572d70" />
+
+* Canny Edge Detector image
+
+<img width="637" height="387" alt="image" src="https://github.com/user-attachments/assets/072e41aa-7b05-486f-9879-aacdf598a198" />
+
+* Result of Hough Transform
+
+<img width="636" height="391" alt="image" src="https://github.com/user-attachments/assets/f167c3f2-2720-46cf-a6a6-5ab710393981" />
 
 ---
 
-##  Developed By
+## Result
 
-* **Name:** ____________________________
-* **Register No:** ______________________
+Thus, the Result of Hough Transform is successfully implemented by completing the missing code sections. The system detects and highlights lane lines effectively.
+
+---
+
+
